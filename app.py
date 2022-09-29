@@ -32,7 +32,7 @@ class Bot:
         self.bot.send_message(self.current_msg.chat.id, text, reply_to_message_id=message_id)
 
     def is_current_msg_photo(self):
-        return self.current_msg['content_type'] != 'photo'
+        return self.current_msg.content_type == 'photo'
 
     def download_user_photo(self, quality=0):
         """
@@ -40,7 +40,7 @@ class Bot:
         :param quality: integer representing the file quality. Allowed values are [0, 1, 2, 3]
         :return:
         """
-        if self.current_msg['content_type'] != 'photo':
+        if self.current_msg.content_type != 'photo':
             raise RuntimeError(f'Message content of type \'photo\' expected, but got {self.current_msg["content_type"]}')
 
         file_info = self.bot.get_file(self.current_msg.photo[quality].file_id)
@@ -68,7 +68,7 @@ if __name__ == '__main__':
     with open('.telegramToken') as f:
         _token = f.read()
 
-    my_bot = QuoteBot(_token)
+    my_bot = Bot(_token)
     my_bot.start()
 
 
