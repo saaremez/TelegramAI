@@ -1,7 +1,7 @@
 import telebot
 from utils import search_download_youtube_video
 from loguru import logger
-import time
+
 from yt_dlp import YoutubeDL
 
 
@@ -82,7 +82,7 @@ class YoutubeBot(Bot):
 
         return results
 
-    pass
+
 
 
 if __name__ == '__main__':
