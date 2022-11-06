@@ -1,8 +1,9 @@
 import telebot
 from utils import search_download_youtube_video
 from loguru import logger
-
+import time
 from yt_dlp import YoutubeDL
+
 
 
 class Bot:
@@ -57,7 +58,9 @@ class Bot:
 
 
 class QuoteBot(Bot):
-    pass
+    def handle_message(self, message):
+        if message.text != 'Don\'t quote me please':
+            self.send_text_with_quote(message.text, message_id=message.message_id)
 
 
 class YoutubeBot(Bot):
@@ -81,8 +84,6 @@ class YoutubeBot(Bot):
                 })
 
         return results
-
-
 
 
 if __name__ == '__main__':
